@@ -7,8 +7,7 @@ module.exports = function() {
 
     var report = cli.executeOnFiles(['.']);
 
-    var res = _(report.results)
-        .reject({ errorCount : 0 })
+    var res = _(CLIEngine.getErrorResults(report.results))
         .pluck('messages')
         .flatten()
         .pluck('ruleId')
