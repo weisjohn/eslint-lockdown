@@ -9,7 +9,7 @@ $ npm i -g eslint-lockdown
 $ eslint-lockdown
 ```
 
-`eslint-lockdown` will generate an `.eslintrc` to utilize `eslint` against a legacy codebase. It reads in your (optional) current `.eslintrc` file and generates a new `.eslintrc` with failing rules marked as `warn` which the codebase violates. This allows you to "put a stake in the ground" to prevent the codebase from getting worse, utilizing `eslint` as part of your build process without halting development until you have time to refactor.
+`eslint-lockdown` will generate an `.eslintrc` to utilize `eslint` against a legacy codebase. It reads in your (optional) current `.eslintrc` file and generates a new `.eslintrc` with failing rules marked as `warn`. This allows you to "put a stake in the ground" to prevent your code getting worse, utilizing `eslint` as part of your build process without halting development.
 
 By default, `eslint-lockdown` will overwrite the `.eslintrc` file. To preview the results without overwriting:
 
