@@ -1,0 +1,16 @@
+{
+  "name": "eslint-lockdown",
+  "version": "0.0.1",
+  "description": "generate an .eslintrc from an ideal config against a legacy codebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "lockdown",
+    "legacy"
+  ],
+  "author": "John Weis <weis.john@gmail.com>",
+  "license": "MIT"
+}
