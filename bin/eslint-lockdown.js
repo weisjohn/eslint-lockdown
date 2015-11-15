@@ -6,4 +6,7 @@ var lockdown = require('../');
 
 program.version(pkg.version).parse(process.argv);
 
-lockdown();
+lockdown(process.cwd(), function(err, res) {
+    if (err) return console.error(err);
+    console.log(JSON.stringify(res, null, 4));
+});
