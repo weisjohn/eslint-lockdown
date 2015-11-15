@@ -10,11 +10,11 @@ var file = path.join(cwd, '.eslintrc');
 
 program
     .version(pkg.version)
-    .option('-d', '--debug', 'Don\'t overwrite the `.eslintrc` file')
+    .option('--debug', '-D', 'Don\'t overwrite the `.eslintrc` file')
     .parse(process.argv);
 
 function run(config, cb) {
-    lockdown(cwd, config, function(err, res) {
+    lockdown(cwd, config, function(err, config) {
         if (err) return cb(err);
         return cb(null, config);
     });
@@ -36,9 +36,8 @@ function read(cb) {
     });
 }
 
-function write(config, cb) {
-    console.log('file', file);
-    fs.writeFile(file, JSON.stringify(config, null, 4), cb);
+function write(body, cb) {
+    fs.writeFile(file, body, cb);
 }
 
 // all together now
@@ -46,10 +45,9 @@ read(function(err, config) {
     if (err || !config) config = {};
     run(config, function(err, config) {
         if (err) return console.error(err);
-        console.log(program);
-
-        if (program.debug) return console.log(config);
-        write(config, function(err) {
+        var pretty = JSON.stringify(config, null, 4);
+        if (program.debug) return console.log(pretty);
+        write(pretty, function(err) {
             if (err) return console.error(err);
         });
     });
