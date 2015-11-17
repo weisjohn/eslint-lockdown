@@ -41,20 +41,6 @@ function write(body, cb) {
     fs.writeFile(file, body, cb);
 }
 
-// all together now
-read(function(err, config) {
-    if (err || !config) config = {};
-    run(config, function(err, config) {
-        if (err) return console.error(err);
-        var pretty = prettify(config);
-        if (program.debug) return console.log(pretty);
-        write(pretty, function(err) {
-            if (err) return console.error(err);
-        });
-    });
-});
-
-
 function prettify(config) {
 
     // simple store for replacement tokens
@@ -79,3 +65,16 @@ function prettify(config) {
             .replace(/\n/g, ' ').replace(/  /g, ' ');
     });
 }
+
+// all together now
+read(function(err, config) {
+    if (err || !config) config = {};
+    run(config, function(err, config) {
+        if (err) return console.error(err);
+        var pretty = prettify(config);
+        if (program.debug) return console.log(pretty);
+        write(pretty, function(err) {
+            if (err) return console.error(err);
+        });
+    });
+});
