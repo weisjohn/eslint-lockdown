@@ -17,19 +17,6 @@ By default, `eslint-lockdown` will overwrite the `.eslintrc` file. To preview th
 $ eslint-lockdown --debug
 ```
 
-### library
-
-If you want to further wrangle the configuration, you can use `eslint-lockdown` as a node library:
-
-```
-var lockdown = require('eslint-lockdown');
-
-lockdown(__dirname, function(err, config) {
-    if (err) return console.error(err);
-    console.log(config);
-});
-```
-
 ### example
 
 This snippet, `foo.js`:
@@ -80,4 +67,17 @@ $ eslint .
   3:5  warning  "console" is not defined            no-undef
 
 ✖ 4 problems (0 errors, 4 warnings)
+```
+
+### library
+
+If you want to further wrangle the configuration, you can use `eslint-lockdown` as a node library:
+
+```
+var lockdown = require('eslint-lockdown');
+
+lockdown(__dirname, function(err, config) {
+    if (err) return console.error(err);
+    console.log(config);
+});
 ```
