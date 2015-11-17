@@ -47,7 +47,7 @@ function prettify(config) {
     var replaces = [];
 
     // delimiter by which we inject placeholder to find on the .replace sweep
-    var delimiter = '[{}]';
+    var delimiter = '[[[__]]]';
 
     var pretty = JSON.stringify(config, function replacer(key, value) {
 
@@ -55,12 +55,12 @@ function prettify(config) {
         if (!_.isArray(value)) return value;
 
         // insert a delimiter and index into the string, store the value
-        return delimiter.replace('{}', replaces.push(value) - 1);
+        return delimiter.replace('__', replaces.push(value) - 1);
 
     }, 4);
 
     // find delimiter array references and replace
-    return pretty.replace(/\"\[(\d)\]\"/g, function(match, $1) {
+    return pretty.replace(/\"\[\[\[(\d)\]\]\]\"/g, function(match, $1) {
         return JSON.stringify(replaces[$1], null, ' ')
             .replace(/\n/g, ' ').replace(/  /g, ' ');
     });
