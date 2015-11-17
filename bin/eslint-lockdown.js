@@ -38,7 +38,7 @@ function read(cb) {
 }
 
 function write(body, cb) {
-    fs.writeFile(file, body, cb);
+    fs.writeFile(file, body + '\n', cb);
 }
 
 function prettify(config) {
