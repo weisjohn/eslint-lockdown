@@ -2,22 +2,23 @@
 var CLIEngine = require('eslint').CLIEngine;
 var _ = require('lodash');
 
-module.exports = function(cwd, config, cb) {
+module.exports = function(cwd, conf, cb) {
 
     var cli = new CLIEngine({});
     var report = cli.executeOnFiles(['.']);
 
-    var rules = _(CLIEngine.getErrorResults(report.results))
-        .pluck('messages')
-        .flatten()
-        .pluck('ruleId')
-        .uniq()
-        .reduce(function(prev, current) {
-            prev[current] = [ 1 ];
-            return prev;
-        }, {});
+    _(CLIEngine.getErrorResults(report.results))
+        .pluck('messages').flatten()
+        .pluck('ruleId').uniq()
+        .forEach(function(key) {
 
-    config.rules = _.assign(config.rules || {}, rules);
+            // if a named rule is not specified, initialize it
+            if (!conf.rules[key] || !_.isArray(conf.rules[key]))
+                conf.rules[key] = [];
 
-    cb(null, config);
+            // mark the rule as warn
+            conf.rules[key][0] = 1;
+        }).value();
+
+    cb(null, conf);
 };
