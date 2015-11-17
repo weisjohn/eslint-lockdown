@@ -60,7 +60,7 @@ function prettify(config) {
     }, 4);
 
     // find delimiter array references and replace
-    return pretty.replace(/\"\[\[\[(\d)\]\]\]\"/g, function(match, $1) {
+    return pretty.replace(/\"\[\[\[(\d+)\]\]\]\"/g, function(match, $1) {
         // return the JSON representation
         return JSON.stringify(replaces[$1], null, ' ')
             // remove the new-lines and extra spaces
