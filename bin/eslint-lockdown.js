@@ -22,7 +22,7 @@ function run(config, cb) {
 }
 
 function read(cb) {
-    fs.access(file, fs.R_OK, function(err) {
+    fs.access(file, fs.R_OK | fs.W_OK, function(err) {
         if (err) return cb(err);
         fs.readFile(file, function(err, file) {
             if (err) return cb(err);
@@ -68,15 +68,29 @@ function prettify(config) {
     });
 }
 
-// all together now
-read(function(err, config) {
-    if (err || !config) config = {};
+function finish(config) {
     run(config, function(err, config) {
         if (err) return console.error(err);
         var pretty = prettify(config);
         if (program.debug) return console.log(pretty);
         write(pretty, function(err) {
             if (err) return console.error(err);
+        });
+    });
+}
+
+function patch(cb) {
+    var default_config = { "extends": "eslint:recommended" };
+    var body = JSON.stringify(default_config, null, 4);
+    write(body, cb);
+}
+
+// all together now
+read(function(err, config) {
+    if (!err) return finish(config);
+    patch(function() {
+        read(function(err, config) {
+            finish(config);
         });
     });
 });

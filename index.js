@@ -8,7 +8,7 @@ module.exports = function(cwd, conf, cb) {
     var report = cli.executeOnFiles(['.']);
 
     // safety check
-    if (!conf) conf = {};
+    if (!conf) conf = { "extends": "eslint:recommended" };
     if (!conf.rules) conf.rules = {};
 
     _(CLIEngine.getErrorResults(report.results))
