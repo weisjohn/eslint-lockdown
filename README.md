@@ -61,15 +61,9 @@ Running `eslint-lockdown`, we would generate an `.eslintrc` file to make `eslint
 {
     "extends": "eslint:recommended",
     "rules": {
-        "no-undef": [
-            1
-        ],
-        "no-unused-vars": [
-            1
-        ],
-        "no-console": [
-            1
-        ]
+        "no-undef": [ 1 ],
+        "no-unused-vars": [ 1 ],
+        "no-console": [ 1 ]
     }
 }
 ```
