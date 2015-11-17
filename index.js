@@ -7,6 +7,10 @@ module.exports = function(cwd, conf, cb) {
     var cli = new CLIEngine({});
     var report = cli.executeOnFiles(['.']);
 
+    // safety check
+    if (!conf) conf = {};
+    if (!conf.rules) conf.rules = {};
+
     _(CLIEngine.getErrorResults(report.results))
         .pluck('messages').flatten()
         .pluck('ruleId').uniq()
