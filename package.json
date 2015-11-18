@@ -1,6 +1,6 @@
 {
   "name": "eslint-lockdown",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "generate an .eslintrc against a legacy codebase",
   "main": "index.js",
   "bin": "bin/eslint-lockdown.js",
@@ -13,6 +13,8 @@
   },
   "keywords": [
     "eslint",
+    "generate",
+    "lock",
     "lockdown",
     "legacy"
   ],
